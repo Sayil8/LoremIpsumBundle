@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="saam_lorem_ipsum.saam_ipsum" class="SaaM\LoremIpsumBundle\SaaMIpsum" public="true">
+            <argument type="service" id="saam_lorem_ipsum.word_provider" />
+        </service>
+
+        <service id="saam_lorem_ipsum.saam_word_provider" class="SaaM\LoremIpsumBundle\SaaMWordProvider" />
+
+        <service id="saam_lorem_ipsum.word_provider" alias="saam_lorem_ipsum.saam_word_provider" public="false" />
+
+        <service id="SaaM\LoremIpsumBundle\SaaMIpsum" alias="saam_lorem_ipsum.saam_ipsum" public="false"/>
+    </services>
+</container>
