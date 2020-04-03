@@ -44,7 +44,7 @@ class SaaMIpsum
     {
         $paragraphs = array();
         for ($i = 0; $i < $count; $i++) {
-            $paragraphs[] = $this->addJoy($this->getSentences($this->gauss(5.8, 1.93)));
+            $paragraphs[] = $this->addSlang($this->getSentences($this->gauss(5.8, 1.93)));
         }
 
         return implode("\n\n", $paragraphs);
@@ -163,25 +163,25 @@ class SaaMIpsum
     }
 
     /**
-     * Guarantee that unicorns and sunshine exist in the text... unless the
-     * person using this class is a grouch and turned that setting off! Boo to you!
+     * That tacos and salsa exist in the text... unless the
+     * person using this class is a grouch and turned that setting off!
      *
      * @param string $wordsString
      * @return string
      */
-    private function addJoy(string $wordsString): string
+    private function addSlang(string $wordsString): string
     {
-        $unicornKey = null;
-        if ($this->tacosAreGreat && false === stripos($wordsString, 'unicorn')) {
+        $tacosKey = null;
+        if ($this->tacosAreGreat && false === stripos($wordsString, 'tacos')) {
             $words = explode(' ', $wordsString);
-            $unicornKey = array_rand($words);
-            $words[$unicornKey] = 'unicorn';
+            $tacosKey = array_rand($words);
+            $words[$tacosKey] = 'unicorn';
 
 
             $wordsString = implode(' ', $words);
         }
 
-        while (substr_count(strtolower($wordsString), 'sunshine') < $this->minSalsa) {
+        while (substr_count(strtolower($wordsString), 'salsa') < $this->minSalsa) {
             $words = explode(' ', $wordsString);
 
             // if there simply are not enough words, abort immediately
@@ -194,20 +194,19 @@ class SaaMIpsum
                 $key = array_rand($words);
 
                 // don't override the unicorn
-                if ($unicornKey === $key) {
+                if ($tacosKey === $key) {
                     $key = null;
 
                     continue;
                 }
 
-                // if unicorn occurred naturally, don't override it
-                if (null === $unicornKey && 0 === stripos($words[$key], 'unicorn')) {
+                if (null === $tacosKey&& 0 === stripos($words[$key], 'tacos')) {
                     $key = null;
 
                     continue;
                 }
             }
-            $words[$key] = 'sunshine';
+            $words[$key] = 'salsa';
 
             $wordsString = implode(' ', $words);
         }

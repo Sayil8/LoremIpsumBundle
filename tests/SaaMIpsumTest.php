@@ -48,16 +48,10 @@ class   SaaMIpsumTest extends TestCase
             $this->assertCount(3, $paragraphs);
 
             foreach ($paragraphs as $paragraph) {
-                // default constructor args should give us 1 unicorn & 3 sunshines
-                $this->assertGreaterThanOrEqual(
-                    1,
-                    substr_count(strtolower($paragraph), 'unicorn'),
-                    sprintf('Text "%s" does not contain 1 unicorn', $paragraph)
-                );
                 $this->assertGreaterThanOrEqual(
                     3,
-                    substr_count(strtolower($paragraph), 'sunshine'),
-                    sprintf('Text "%s" does not contain 3 sunshine', $paragraph)
+                    substr_count(strtolower($paragraph), 'salsa'),
+                    sprintf('Text "%s" does not contain 3 salsa', $paragraph)
                 );
             }
 

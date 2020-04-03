@@ -88,6 +88,8 @@ class SaaMWordProvider implements WordProviderInterface
             'rascuache',
             'sacatón',
             'simón',
+            'salsa',
+            'tacos',
             'teporocho',
             'tamales',
             'tompiates',
