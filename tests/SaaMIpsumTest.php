@@ -10,7 +10,7 @@ class   SaaMIpsumTest extends TestCase
 {
     public function testGetWords()
     {
-        $ipsum = new SaaMIpsum(new SaaMWordProvider());
+        $ipsum = new SaaMIpsum([new SaaMWordProvider()]);
 
         $words = $ipsum->getWords(1);
         $this->assertIsString($words);
@@ -25,7 +25,7 @@ class   SaaMIpsumTest extends TestCase
 
     public function testGetSentences()
     {
-        $ipsum = new SaaMIpsum(new SaaMWordProvider());
+        $ipsum = new SaaMIpsum([new SaaMWordProvider()]);
 
         $text = $ipsum->getSentences(3);
         $this->assertEquals(3, substr_count($text, '.'));
@@ -42,7 +42,7 @@ class   SaaMIpsumTest extends TestCase
         // weird: using a loop because the results are random, and so
         // they may pass several times by luck
         for ($i = 0; $i < 100; $i++) {
-            $ipsum = new SaaMIpsum(new SaaMWordProvider());
+            $ipsum = new SaaMIpsum([new SaaMWordProvider()]);
             $text = $ipsum->getParagraphs(3);
             $paragraphs = explode("\n\n", $text);
             $this->assertCount(3, $paragraphs);

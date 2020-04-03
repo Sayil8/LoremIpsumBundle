@@ -26,19 +26,6 @@ class FunctionalTest extends TestCase
         $this->assertIsString($ipsum->getParagraphs());
 
     }
-    public function testServiceWiringWithConfiguration()
-    {
-        $kernel = new SaaMLoremIpsumTestingKernel([
-            'word_provider' => 'stub_word_list'
-        ]);
-        $kernel->boot();
-        $container = $kernel->getContainer();
-
-        $ipsum = $container->get('saam_lorem_ipsum.saam_ipsum');
-
-        self::assertStringContainsString('stub', $ipsum->getWords(2));
-
-    }
 
 }
 
@@ -57,7 +44,6 @@ class SaaMLoremIpsumTestingKernel extends Kernel
     {
         return [
           new SaaMLoremIpsumBundle(),
-
         ];
     }
 
