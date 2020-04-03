@@ -3,16 +3,18 @@
 namespace SaaM\LoremIpsumBundle;
 class SaaMIpsum
 {
-    private $MWordProvider;
+    /** @var WordProviderInterface [] */
+    private $MWordProviders;
 
     private $tacosAreGreat;
 
     private $minSalsa;
 
+    private $wordList;
 
-    public function __construct( WordProviderInterface $MWordProvider, $tacosAreGreat = true, $minSalsa = 3)
+    public function __construct( iterable $MWordProviders, $tacosAreGreat = true, $minSalsa = 3)
     {
-        $this->MWordProvider = $MWordProvider;
+        $this->MWordProviders = $MWordProviders;
         $this->tacosAreGreat = $tacosAreGreat;
         $this->minSalsa = $minSalsa;
 
@@ -170,7 +172,7 @@ class SaaMIpsum
     private function addJoy(string $wordsString): string
     {
         $unicornKey = null;
-        if ($this->unicornsAreReal && false === stripos($wordsString, 'unicorn')) {
+        if ($this->tacosAreGreat && false === stripos($wordsString, 'unicorn')) {
             $words = explode(' ', $wordsString);
             $unicornKey = array_rand($words);
             $words[$unicornKey] = 'unicorn';
@@ -179,11 +181,11 @@ class SaaMIpsum
             $wordsString = implode(' ', $words);
         }
 
-        while (substr_count(strtolower($wordsString), 'sunshine') < $this->minSunshine) {
+        while (substr_count(strtolower($wordsString), 'sunshine') < $this->minSalsa) {
             $words = explode(' ', $wordsString);
 
             // if there simply are not enough words, abort immediately
-            if (count($words) < ($this->minSunshine + 1)) {
+            if (count($words) < ($this->minSalsa + 1)) {
                 break;
             }
 
@@ -215,6 +217,17 @@ class SaaMIpsum
 
     private function getWordList(): array
     {
-        return $this->MWordProvider->getWordList();
+      if(null === $this->wordList) {
+          $words = [];
+          foreach ($this->MWordProviders as $wordProviders){
+              $words = array_merge($words, $wordProviders->getWordList());
+          }
+          if( count($words) <= 1 ){
+              throw new \Exception('Word list must contain at least 2 words');
+          }
+
+          $this->wordList = $words;
+      }
+      return $this->wordList;
     }
 }

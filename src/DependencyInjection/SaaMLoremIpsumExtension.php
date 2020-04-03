@@ -2,6 +2,7 @@
 
 namespace SaaM\LoremIpsumBundle\DependencyInjection;
 
+use SaaM\LoremIpsumBundle\DependencyInjection\Compiler\WordProviderCompilerPass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -20,11 +21,11 @@ class SaaMLoremIpsumExtension extends Extension
         $cofig = $this->processConfiguration($configuration, $configs);
 
         $definition = $container->getDefinition('saam_lorem_ipsum.saam_ipsum');
-        if(null !== $cofig['word_provider']) {
-            $container->setAlias('saam_lorem_ipsum.word_provider', $cofig['word_provider']);
-        }
         $definition->setArgument(1, $cofig['tacos_are_great']);
         $definition->setArgument(2, $cofig['min_salsa']);
+
+        $container->registerForAutoconfiguration(WordProviderCompilerPass::class)
+            ->addTag('saam_ipsum_word_provider');
     }
 
     public function getAlias()

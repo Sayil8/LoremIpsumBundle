@@ -21,7 +21,6 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->booleanNode('tacos_are_great')->defaultTrue()->info('Do you think tacos are the best')->end()
             ->integerNode('min_salsa')->defaultValue(3)->info('How much do you like salsa')->end()
-            ->scalarNode('word_provider')->defaultNull()->info('Override this amazing mexican slang')->end()
             ->end()
         ;
          return $treeBuilder;

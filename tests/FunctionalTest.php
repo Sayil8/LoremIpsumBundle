@@ -1,0 +1,87 @@
+<?php
+
+
+namespace SaaM\LoremIpsumBundle\Tests;
+
+
+use PHPUnit\Framework\TestCase;
+use SaaM\LoremIpsumBundle\SaaMIpsum;
+use SaaM\LoremIpsumBundle\SaaMLoremIpsumBundle;
+use SaaM\LoremIpsumBundle\WordProviderInterface;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\HttpKernel\Kernel;
+
+class FunctionalTest extends TestCase
+{
+    public function testServiceWiring()
+    {
+        $kernel = new SaaMLoremIpsumTestingKernel();
+        $kernel->boot();
+        $container = $kernel->getContainer();
+
+        $ipsum = $container->get('saam_lorem_ipsum.saam_ipsum');
+        $this->assertInstanceOf(SaaMIpsum::class, $ipsum);
+        $this->assertIsString($ipsum->getParagraphs());
+
+    }
+    public function testServiceWiringWithConfiguration()
+    {
+        $kernel = new SaaMLoremIpsumTestingKernel([
+            'word_provider' => 'stub_word_list'
+        ]);
+        $kernel->boot();
+        $container = $kernel->getContainer();
+
+        $ipsum = $container->get('saam_lorem_ipsum.saam_ipsum');
+
+        self::assertStringContainsString('stub', $ipsum->getWords(2));
+
+    }
+
+}
+
+class SaaMLoremIpsumTestingKernel extends Kernel
+{
+    private $saaMIpsumConfig;
+
+    public function __construct(array $saaMIpsumConfig = [])
+    {
+        $this->saaMIpsumConfig = $saaMIpsumConfig;
+        parent::__construct('test', true);
+
+    }
+
+    public function registerBundles()
+    {
+        return [
+          new SaaMLoremIpsumBundle(),
+
+        ];
+    }
+
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader->load(function (ContainerBuilder $container){
+            $container->register('stub_word_list', StubWordList::class);
+
+            $container->loadFromExtension('saam_lorem_ipsum', $this->saaMIpsumConfig);
+        });
+    }
+
+    public function getCacheDir()
+    {
+        return __DIR__.'/../var/cache/'.spl_object_hash($this);
+    }
+
+
+}
+
+class StubWordList implements WordProviderInterface{
+    public function getWordList(): array
+    {
+        return ['stub', 'stub2'];
+    }
+}
+
