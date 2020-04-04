@@ -31,13 +31,9 @@ class FunctionalTest extends TestCase
 
 class SaaMLoremIpsumTestingKernel extends Kernel
 {
-    private $saaMIpsumConfig;
-
-    public function __construct(array $saaMIpsumConfig = [])
+    public function __construct()
     {
-        $this->saaMIpsumConfig = $saaMIpsumConfig;
         parent::__construct('test', true);
-
     }
 
     public function registerBundles()
@@ -50,9 +46,8 @@ class SaaMLoremIpsumTestingKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(function (ContainerBuilder $container){
-            $container->register('stub_word_list', StubWordList::class);
-
-            $container->loadFromExtension('saam_lorem_ipsum', $this->saaMIpsumConfig);
+            $container->register('stub_word_list', StubWordList::class)
+                ->addTag('saam_ipsum_word_provider');
         });
     }
 
