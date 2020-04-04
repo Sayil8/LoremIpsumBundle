@@ -17,7 +17,7 @@ class FunctionalTest extends TestCase
 {
     public function testServiceWiring()
     {
-        /*
+
         $kernel = new SaaMLoremIpsumTestingKernel();
         $kernel->boot();
         $container = $kernel->getContainer();
@@ -25,8 +25,7 @@ class FunctionalTest extends TestCase
         $ipsum = $container->get('saam_lorem_ipsum.saam_ipsum');
         $this->assertInstanceOf(SaaMIpsum::class, $ipsum);
         $this->assertIsString($ipsum->getParagraphs());
-        */
-        $this->assertEquals(200, 200);
+
 
     }
 
