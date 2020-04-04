@@ -11,9 +11,9 @@
     ],
     "require": {
         "php": "^7.2",
-        "symfony/config": "^4.0",
-        "symfony/dependency-injection": "^4.0",
-        "symfony/http-kernel": "^4.0"
+        "symfony/config": "^3.4 || ^4.0.6",
+        "symfony/dependency-injection": "^3.4 || ^4.0.6",
+        "symfony/http-kernel": "^3.4 || ^4.0.6"
     },
     "autoload": {
         "psr-4": {
@@ -26,9 +26,8 @@
         }
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^4.0",
-        "symfony/framework-bundle": "^4.0",
-        "symfony/browser-kit": "^5.0"
-
+        "symfony/phpunit-bridge": "^3.4 || ^4.0.6",
+        "symfony/framework-bundle": "^3.4 || ^4.0.6",
+        "symfony/browser-kit": "^3.4 || ^4.0.6"
     }
 }
