@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class ApiControllerTest extends TestCase
 {
-
+    /*
     public function testIndex()
     {
         $kernel = new SaaMLoremIpsumControllerKernel();
@@ -27,6 +27,7 @@ class ApiControllerTest extends TestCase
         var_dump($client->getResponse()->getContent());
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
+    */
 }
 class SaaMLoremIpsumControllerKernel extends Kernel
 {
