@@ -35,7 +35,7 @@ matrix:
   allow_failures:
     # Dev-master is allowed to fail.
     - env: STABILITY="dev"
-    - php: 5.3
+    - php: 7.2
       env: SYMFONY_VERSION=3 TEST_GROUP=canFail
 
 before_install:
