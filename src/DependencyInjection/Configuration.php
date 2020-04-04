@@ -16,6 +16,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('saam_lorem_ipsum');
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('saam_lorem_ipsum');
+        }
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
