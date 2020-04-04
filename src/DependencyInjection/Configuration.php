@@ -21,7 +21,6 @@ class Configuration implements ConfigurationInterface
         } else {
             $rootNode = $treeBuilder->root('saam_lorem_ipsum');
         }
-        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
             ->booleanNode('tacos_are_great')->defaultTrue()->info('Do you think tacos are the best')->end()
