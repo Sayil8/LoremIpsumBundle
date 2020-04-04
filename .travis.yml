@@ -35,6 +35,8 @@ matrix:
   allow_failures:
     # Dev-master is allowed to fail.
     - env: STABILITY="dev"
+    - php: 5.3
+      env: SYMFONY_VERSION=3 TEST_GROUP=canFail
 
 before_install:
   - gem install rake
