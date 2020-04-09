@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Sayil8/MexicanLoremIpsumBundle.svg?branch=master)](https://travis-ci.org/github/Sayil8/MexicanLoremIpsumBundle)
 # Hello MexicanLoremIpsumBundle!
 MexicanLoremIpsumBundle is a way for you to generate "fake text" into
 your Symfony application. Instead of the traditional LoremIpsum you will get the best mexican slang
